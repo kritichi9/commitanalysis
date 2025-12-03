@@ -107,10 +107,10 @@ Jupyter Notebook
 ```bash
 jupyter notebook
 ```
-Open CommitAnalysis.ipynb and run all cells. Also, the file with all output's is added as CommitAnalysiswithOutput.ipynb which can downloaded and viewed locally
-Note: For some reason CommitAnalysiswithOutput.ipynb this is not viewable properly on git we need to download the file locally
 
-For running through the Python Script. But it is better to run on Google Collab as it has GPU support and running the model locally will much be better. Run:
+Open CommitAnalysis.ipynb and run all cells. Also, the file with all output's is added as CommitAnalysiswithOutput.ipynb which can downloaded and viewed locally. 
+Note: For some reason CommitAnalysiswithOutput.ipynb this is not viewable properly on git we need to download the file locally
+For running through the Python Script. But it is better to run on Google Collab as it has GPU support and running the model locally is slow. Run:
 ``` python commit_analysis.py```
 
 6. **Results**
