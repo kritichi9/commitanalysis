@@ -1,62 +1,122 @@
-# COMP 6630 - Commit Classification Project
+# COMP 6630 – Commit Classification Project
 
 ## Overview
-This project performs **multi-class commit type classification** using machine learning techniques. Rare commit types are merged into an "Other" category, and TF-IDF features are extracted from commit messages. Two models are implemented:
+This project performs **multi-class commit type classification** using both **traditional machine learning** (TF-IDF + Logistic Regression, Naive Bayes, Random Forest) and **deep learning** (BERT) approaches. The goal is to predict the macro-type of a software commit from its natural-language commit message.
 
-- Logistic Regression (with class balancing)
-- Multinomial Naive Bayes
+Key functionalities include:
 
-The project also includes:
-- Dataset exploration and visualization
-- Confusion matrices and per-class metrics
-- Top words per commit type
-- Misclassified commit analysis
+- **Text preprocessing**: Lowercasing, stopword removal, URL & punctuation cleanup  
+- **TF-IDF vectorization** for classical ML models  
+- **BERT fine-tuning** for improved performance  
+- **Model evaluation**: Accuracy, F1-score, per-class metrics  
+- **Visualizations**:
+  - Commit type distribution in the dataset
+  - Commit message length distribution
+  - Confusion matrices (TF-IDF & BERT)
+  - Normalized BERT confusion matrix
+  - Top TF-IDF features from Random Forest
+  - Prediction distribution for BERT
+- **Misclassified commit analysis**: Inspect incorrectly predicted commit messages  
 
 ---
 
 ## Dataset
-The dataset used is `meriemm6/commit-classification-dataset` from the HuggingFace Hub.
+The dataset used is [`0x404/ccs_dataset`](https://huggingface.co/datasets/0x404/ccs_dataset) from HuggingFace.
 
 **Columns:**
-- `Message`: Commit message text
-- `Ground truth`: Commit type label
+- `Message`: Commit message text  
+- `Ground truth`: Commit type label (`build`, `chore`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`)
+
+**Splits:**
+- `train`
+- `eval`
+- `test`
 
 ---
 
 ## Features
-- **Text preprocessing**: Lowercasing, stopword removal, URL & punctuation cleanup
-- **TF-IDF vectorization** for feature extraction
-- **Model evaluation**: Accuracy, F1-score, per-class metrics
+- **Preprocessing**: Clean commit messages by:
+  - Lowercasing
+  - Removing URLs
+  - Removing non-alphabetic characters
+  - Removing stopwords
+- **TF-IDF Features**: Maximum 5000 features  
+- **Models**:
+  - Logistic Regression (balanced)
+  - Multinomial Naive Bayes
+  - Random Forest
+  - BERT (`bert-base-uncased`) fine-tuned for 10 epochs
+- **Evaluation Metrics**:
+  - Accuracy
+  - Macro F1-score
+  - Confusion matrices
 - **Visualizations**:
   - Commit type distribution
-  - Message length distribution
-  - Confusion matrices
-  - Top words per commit type
+  - Message length histogram
+  - Top TF-IDF features
+  - Model prediction distribution
+  - Confusion matrices for TF-IDF models
+  - BERT normalized confusion matrix
+
+---
+
+## Prerequisites
+
+- **Python 3.12 or higher**  
+  Download and install from [python.org](https://www.python.org/downloads/)
+
+- **Git** (optional, if cloning the repository)  
+  Download from [git-scm.com](https://git-scm.com/downloads)
 
 ---
 
 ## Setup & Installation
 
-1. Clone the repository:
+1. **Clone the repository**
 ```bash
-git clone <repository-url>
+git clone git@github.com:kritichi9/commitanalysis.git
 cd commit-classification
 ```
 
-2. Create a virtual environment:
+2. **Create and activate a virtual environment**
 ```bash
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-venv\Scripts\activate     # Windows
+# Linux / Mac
+source venv/bin/activate
+# Windows
+venv\Scripts\activate
 ```
 
-3. Install dependencies:
+3. **Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
+Required packages include: transformers, datasets, sentencepiece, torch, scikit-learn, nltk, matplotlib, seaborn, pandas, numpy.
 
-4. Run the notebook or script:
+4. **Download NLTK stopwords**
 ```bash
-python commit_classification.py
+import nltk
+nltk.download('stopwords')
 ```
+
+5. **Running the Project**
+
+You can run either as a Jupyter Notebook or a Python script:
+Jupyter Notebook
+
+```bash
+jupyter notebook
+```
+Open Commit_Analysis.ipynb and run all cells.
+
+For running through the Python Script. Run:
+``` python commit_analysis.py```
+
+6. **Results**
+
+Training, validation, and test performance are reported for all models
+
+Confusion matrices and misclassification samples help understand model behavior
+
+Top TF-IDF features and BERT predictions are visualized for interpretability
 
