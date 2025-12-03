@@ -107,7 +107,7 @@ Jupyter Notebook
 ```bash
 jupyter notebook
 ```
-Open Commit_Analysis.ipynb and run all cells.
+Open CommitAnalysis.ipynb and run all cells.
 
 For running through the Python Script. But it is better to run on Google Collab as it has GPU support and running the model locally will much be better. Run:
 ``` python commit_analysis.py```
